@@ -33,7 +33,7 @@ function read_() {
 function out_(o) { return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }
 
 function doGet(e) {
-  const a = e.parameter, id = +a.loket, lock = LockService.getScriptLock();
+  const a = (e && e.parameter) || {}, id = +a.loket, lock = LockService.getScriptLock();
   lock.waitLock(15000);
   try {
     if (['panggil','ulang','reset'].indexOf(a.action) >= 0 && a.pin !== PIN) return out_({ error: 'PIN salah' });
