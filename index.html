@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id"><head>
+    <title>Sistem Antrian - MTsN 2 Brebes</title>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script>tailwind.config={theme:{extend:{fontFamily:{sans:["Plus Jakarta Sans","sans-serif"]}}}}</script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans min-h-screen flex flex-col justify-between overflow-x-hidden">
+    <header class="bg-slate-900 text-white px-6 py-3 shadow-md flex justify-between items-center z-10 border-b border-slate-800">
+        <div class="flex items-center space-x-3"><div class="bg-emerald-600 text-white p-2 rounded-lg"><i class="fa-solid fa-users-line text-xl"></i></div>
+            <div><h1 class="font-bold text-lg leading-tight tracking-wide">SISTEM ANTRIAN DIGITAL</h1><p class="text-xs text-slate-400">MTs Negeri 2 Brebes - Pelayanan Terpadu Satu Pintu</p></div></div>
+        <div class="flex items-center space-x-3"><div class="text-right px-4 py-1 bg-slate-800 rounded-lg border border-slate-700 hidden md:block"><div id="clockTime" class="text-lg font-bold text-emerald-400 font-mono">00:00:00</div><div id="clockDate" class="text-[10px] text-slate-400 uppercase tracking-wider"></div></div><span id="conn" class="w-2 h-2 rounded-full bg-slate-500" title="Status koneksi"></span>
+            <button id="soundBtn" onclick="toggleSound()" class="animate-pulse bg-amber-500 hover:bg-amber-600 text-slate-900 px-4 py-2 rounded-lg font-bold text-sm flex items-center gap-2"><i class="fa-solid fa-volume-xmark"></i><span>Aktifkan Suara</span></button>
+            <a href="teller.html" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-medium text-sm transition flex items-center gap-2 shadow"><i class="fa-solid fa-sliders"></i><span>Panel Teller</span></a>
+            <button onclick="toggleFullScreen()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 p-2.5 rounded-lg border border-slate-700 transition" title="Layar Penuh"><i class="fa-solid fa-expand text-lg"></i></button></div></header>
+    <main class="p-4 md:p-6 flex-grow flex flex-col justify-center max-w-[1920px] mx-auto w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            <div id="cards" class="lg:col-span-5 grid grid-cols-2 gap-4"></div>
+            <div class="lg:col-span-7 flex flex-col gap-4">
+                <div class="bg-slate-300 rounded-3xl overflow-hidden shadow-lg border-4 border-white aspect-video relative group flex items-center justify-center">
+                    <video id="queueVideo" class="w-full h-full object-cover" autoplay loop muted playsinline>
+                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                    </video>
+                    <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition bg-slate-900/80 backdrop-blur-md text-white p-2 rounded-lg flex items-center space-x-2 text-xs">
+                        <button onclick="toggleVideoMute()" id="muteBtn" class="hover:text-emerald-400 p-1"><i class="fa-solid fa-volume-xmark text-base"></i></button>
+                        <label class="cursor-pointer bg-emerald-600 hover:bg-emerald-700 text-white px-2 py-1 rounded text-xs flex items-center gap-1"><i class="fa-solid fa-upload"></i> Ganti Video<input type="file" accept="video/*" onchange="changeVideoSource(event)" class="hidden"></label>
+                    </div>
+                    <div class="absolute bottom-3 left-3 bg-slate-900/70 backdrop-blur-md text-white text-xs px-3 py-1 rounded-full flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span><span class="font-medium text-[11px] tracking-wide uppercase">Profil MTsN 2 Brebes</span></div>
+                </div>
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 flex items-center justify-around gap-6">
+                    <div class="flex items-center space-x-3"><img src="assets/logo-mtsn2.png" alt="MTsN 2 Brebes" class="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0">
+                        <div class="hidden sm:block"><h3 class="font-extrabold text-slate-800 text-sm md:text-base leading-tight">MADRASAH TSANAWIYAH NEGERI 2 BREBES</h3><p class="text-xs text-slate-500">Terwujudnya Pembelajar yang berakhlakul Karimah, Berprestasi dan Cinta Tanah Air</p></div></div>
+                    <div class="h-12 w-[1px] bg-slate-200 hidden sm:block"></div>
+                    <div class="flex items-center space-x-3"><img src="assets/logo-kemenag.png" alt="Kemenag" class="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0">
+                        <div class="hidden sm:block"><h3 class="font-extrabold text-slate-800 text-sm md:text-base leading-tight">KEMENTERIAN AGAMA</h3><p class="text-xs text-slate-500">Ikhlas Beramal</p></div></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="bg-emerald-800 text-white font-medium py-2.5 px-4 flex items-center shadow-inner z-10">
+        <div class="bg-amber-400 text-slate-900 text-xs font-black uppercase px-3 py-1 rounded-md mr-3 whitespace-nowrap shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-bullhorn animate-bounce"></i><span>Pengumuman</span></div>
+        <div class="overflow-hidden whitespace-nowrap w-full"><div class="animate-marquee text-sm tracking-wide">Selamat Datang di Pelayanan Terpadu Satu Pintu (PTSP) MTs Negeri 2 Brebes • Mohon mengambil nomor antrian di mesin anjungan dan menunggu hingga nomor Anda dipanggil • Jam Pelayanan: Senin - Kamis (07.30 - 15.00 WIB), Jumat (07.30 - 11.30 WIB) • Tetap jaga ketertiban dan kenyamanan bersama.</div></div>
+    </footer>
+    <div id="toastNotification" class="fixed bottom-14 left-1/2 -translate-x-1/2 bg-slate-900/90 text-white text-xs px-4 py-2 rounded-full shadow-lg border border-slate-700 z-50 transition-all duration-300 opacity-0 pointer-events-none flex items-center gap-2"><i class="fa-solid fa-circle-info text-emerald-400"></i><span id="toastMessage"></span></div>
+    <script src="js/config.js"></script><script src="js/common.js"></script><script src="js/display.js"></script>
+</body></html>

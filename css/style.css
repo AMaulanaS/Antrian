@@ -1,0 +1,15 @@
+.teller-card{transition:all .3s cubic-bezier(.4,0,.2,1)}
+.teller-card.calling{animation:pulse-border 1.2s infinite alternate;transform:scale(1.02)}
+@keyframes pulse-border{from{box-shadow:0 0 0 0 rgba(251,191,36,.9)}to{box-shadow:0 0 0 14px rgba(251,191,36,0)}}
+body.simulated-fullscreen{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;z-index:9999!important;overflow:hidden!important;background:#0f172a!important}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:#f1f1f1}::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:4px}
+@keyframes marquee{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+.animate-marquee{display:inline-block;white-space:nowrap;animation:marquee 28s linear infinite}
+.animate-marquee:hover{animation-play-state:paused}
+.kiosk-btn{transition:transform .15s}.kiosk-btn:active{transform:scale(.96)}
+@media print{
+  @page{margin:0}
+  body *{visibility:hidden}
+  #ticketPaper,#ticketPaper *{visibility:visible}
+  #ticketPaper{position:absolute;left:0;top:0;width:58mm;box-shadow:none!important;border:0!important}
+}
