@@ -2,7 +2,7 @@
 window.CONFIG = {
   // Isi dengan URL Web App Google Apps Script (lihat README.md).
   // Dikosongkan = MODE DEMO (data disimpan di browser, cocok untuk uji coba satu komputer).
-  API_URL: "https://script.google.com/macros/s/AKfycbyT8uhO2iuvRGoSqBU9hg3-ZfsyndIeF0LUH4cpk0KCn06vXoDWQ6DVupgHhp_0tTY/exec",
+  API_URL: "https://script.google.com/macros/s/AKfycbxJ83-KSzGGp2l3V6NJ2IE_ygTcxXJLJ04T5R3m6ZaHwvptxNO5vvLzuJ7tl_tiMnHs-Q/exec",
   POLL_MS: 2000,        // interval refresh data (milidetik)
   AUTO_PRINT: false,    // true = langsung cetak tiket setelah ambil nomor (butuh Chrome --kiosk-printing)
   INSTANSI: "MTs Negeri 2 Brebes",
